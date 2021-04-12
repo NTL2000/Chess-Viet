@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "930191614415",
+    "project_id": "tlu-chatapp",
+    "storage_bucket": "tlu-chatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930191614415:android:3bfe8175775b36b51572ba",
+        "android_client_info": {
+          "package_name": "com.TLU.ChatApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930191614415-6t7ud5f7e1avb47lg4duvngb3i1sfmv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1P0duJ6qpWXd5zcJMax5SxVfOxGskz-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930191614415-6t7ud5f7e1avb47lg4duvngb3i1sfmv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930191614415:android:6f86dabca94f12d91572ba",
+        "android_client_info": {
+          "package_name": "com.TLU.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930191614415-6t7ud5f7e1avb47lg4duvngb3i1sfmv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1P0duJ6qpWXd5zcJMax5SxVfOxGskz-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930191614415-6t7ud5f7e1avb47lg4duvngb3i1sfmv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/home_menu"
+        android:layout_height="100dp"
+        android:layout_width="match_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Các phòng"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:textColor="@color/bbtnt"
+            android:gravity="center"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            >
+            <Button
+                android:id="@+id/r1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:text="Phòng 1"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/r1"
+                android:text="Phòng 2"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r3"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_below="@+id/r1"
+                android:text="Phòng 3"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/r3"
+                android:layout_below="@+id/r1"
+                android:text="Phòng 4"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/r3"
+                android:text="Phòng 5"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/r5"
+                android:layout_below="@+id/r3"
+                android:text="Phòng 6"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/r5"
+                android:text="Phòng 7"
+                android:background="@drawable/custome_button_room"/>
+            <Button
+                android:id="@+id/r8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/r5"
+                android:layout_below="@+id/r5"
+                android:text="Phòng 8"
+                android:background="@drawable/custome_button_room"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

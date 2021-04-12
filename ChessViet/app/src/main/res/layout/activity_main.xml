@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chess Việt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textColor="@color/title"
+        android:textSize="40sp"
+        android:layout_marginBottom="15dp"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/lg"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/login_gg"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="15sp"
+        android:background="@drawable/customer_button_login"
+        android:text="Đăng nhập google"
+        android:textColor="@color/bbtnt"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+</LinearLayout>
