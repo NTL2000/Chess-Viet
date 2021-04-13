@@ -13,16 +13,28 @@ import com.google.firebase.auth.FirebaseUser;
 public class Home extends AppCompatActivity {
     Button logout;
     FirebaseUser firebaseUser;
+    Button room1,room2,room3,room4,room5,room6,room7,room8;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
         //hide actionbar
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_home);
-        logout=(Button)findViewById(R.id.btn_log_out);
+        anhxa();
+
+        room1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_r1=new Intent(Home.this,ChessActivity.class);
+                startActivity(intent_r1);
+
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +45,18 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
+
+    }
+    private void anhxa(){
+        room1=(Button)findViewById(R.id.r1);
+        room2=(Button)findViewById(R.id.r2);
+        room3=(Button)findViewById(R.id.r3);
+        room4=(Button)findViewById(R.id.r4);
+        room5=(Button)findViewById(R.id.r5);
+        room6=(Button)findViewById(R.id.r6);
+        room7=(Button)findViewById(R.id.r7);
+        room8=(Button)findViewById(R.id.r8);
+        logout=(Button)findViewById(R.id.btn_log_out);
     }
 
     @Override

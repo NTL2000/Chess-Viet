@@ -3,4 +3,19 @@
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fbYOUR_APP_ID</string>
+    <string name="reset">Chơi lại</string>
+    <string name="reset_dialog">Bạn có chăc chắn muốn chơi lại không?</string>
+
+    <string name="player_1_name">Người chơi 1</string>
+    <string name="player_2_name">Người chơi 2</string>
+    <string name="turn">Lượt đi</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="game_reset">Chơi lại</string>
+    <string name="game_over">Game Over! \n đã hết đường!</string>
+    <string name="over">Trò chơi đã kết thúc</string>
+    <string name="in_check">Đang bị chiếu tướng!</string>
+    <string name="self_check">Bạn không thể đi nước này!</string>
+    <string name="protect">Bạn đang bị chiếu,cần bảo vệ vua!</string>
+    <string name="stalemate">Trạng thái bế tắc,thua cuộc!</string>
+    <string name="promotion">Tốt được phong chức! \n Bạn muốn chọn chức gì?</string>
 </resources>
