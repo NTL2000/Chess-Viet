@@ -13,7 +13,7 @@
     <string name="game_reset">Chơi lại</string>
     <string name="game_over">Game Over! \n đã hết đường!</string>
     <string name="over">Trò chơi đã kết thúc</string>
-    <string name="in_check">Đang bị chiếu tướng!</string>
+    <string name="in_check">Chiếu tướng!</string>
     <string name="self_check">Bạn không thể đi nước này!</string>
     <string name="protect">Bạn đang bị chiếu,cần bảo vệ vua!</string>
     <string name="stalemate">Trạng thái bế tắc,thua cuộc!</string>

@@ -26,11 +26,22 @@ public class Pawn extends ChessMan {
 
         boolean reverse = isWhite();
 
-        mMoves = new Move[3][2];
-        mMoves[0][0] = new Move(reverse ? -1 : 1, 0, false, false, true);
-        mMoves[0][1] = new Move(reverse ? -2 : 2, 0, true, false, true);
-        mMoves[1][0] = new Move(reverse ? -1 : 1, 1, false, true);
-        mMoves[2][0] = new Move(reverse ? -1 : 1, -1, false, true);
+        if(isRevese())
+        {
+            mMoves = new Move[3][2];
+            mMoves[0][0] = new Move(!reverse ? -1 : 1, 0, false, false, true);
+            mMoves[0][1] = new Move(!reverse ? -2 : 2, 0, true, false, true);
+            mMoves[1][0] = new Move(!reverse ? -1 : 1, 1, false, true);
+            mMoves[2][0] = new Move(!reverse ? -1 : 1, -1, false, true);
+        }
+        else
+        {
+            mMoves = new Move[3][2];
+            mMoves[0][0] = new Move(reverse ? -1 : 1, 0, false, false, true);
+            mMoves[0][1] = new Move(reverse ? -2 : 2, 0, true, false, true);
+            mMoves[1][0] = new Move(reverse ? -1 : 1, 1, false, true);
+            mMoves[2][0] = new Move(reverse ? -1 : 1, -1, false, true);
+        }
 
     }
 
@@ -44,8 +55,14 @@ public class Pawn extends ChessMan {
             gameState[shadowPawn.parent.row][shadowPawn.parent.column] = new ChessMan(getContext());
             gameState[shadowPawn.parent.row][shadowPawn.parent.column].setPosition(shadowPawn.parent);
         }
-//      bắt tốt qua đường
-        int enPassantRow = isWhite() ? position.row + 1 : position.row - 1;
+//      board reverse
+        int enPassantRow;
+        if(isRevese()){
+            enPassantRow = isWhite() ? position.row -1 : position.row + 1;
+        }
+        else {
+            enPassantRow = isWhite() ? position.row + 1 : position.row - 1;
+        }
         boolean emPassant = enPassantRow >= 0 && enPassantRow < ChessBoard.NO_OF_ROWS &&
                 (position.row == mPosition.row - 2 || position.row == mPosition.row + 2);
 

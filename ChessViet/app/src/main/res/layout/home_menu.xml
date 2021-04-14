@@ -13,6 +13,7 @@
             android:gravity="center"
             >
             <ImageView
+                android:id="@+id/avartar"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/pi"
@@ -22,8 +23,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginRight="30dp"
+                android:gravity="center"
                 >
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:text="Nguyễn Thành Long"
@@ -32,6 +35,7 @@
                     android:textSize="15sp"
                     android:textColor="@color/bbtnt"/>
                 <TextView
+                    android:id="@+id/score"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:text="10-02-01"

@@ -99,6 +99,10 @@ public class ChessMan extends AppCompatImageView {
     public boolean isWhite() {
         return mColor.equalsIgnoreCase(ChessBoard.WHITE);
     }
+//    xác định màu bàn cờ
+    public boolean isRevese() {
+        return !ChessBoard.isWhite_chessBoard;
+    }
 
     public Drawable resolveDrawable(@DrawableRes int drawableRes, boolean isWhite) {
 
@@ -147,7 +151,7 @@ public class ChessMan extends AppCompatImageView {
         return false;
     }
 
-//
+//cập nhật lại các nước đi
     public void refreshMoves(ChessMan[][] gameState, HashMap<String, ArrayList<Position>> allChessMen) {
 
         if (isChessMan()) {

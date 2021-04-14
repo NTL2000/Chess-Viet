@@ -13,7 +13,10 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.TLU.chessviet.ChessPieces.ChessMan;
 import com.TLU.chessviet.ChessPieces.King;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,6 +25,7 @@ public class ChessBoard extends View {
     public RuleKeeper mRuleKeeper;
 
     public static int NO_OF_COLUMNS = 8, NO_OF_ROWS = NO_OF_COLUMNS,dark, light, selected, white, black, size;
+    public static int x,y,xnew,ynew;
 
 //    màu sắc
     public static LightingColorFilter whiteFilter, blackFilter, selectedFilter;
@@ -32,9 +36,18 @@ public class ChessBoard extends View {
     public ChessMan[][] mGameState = new ChessMan[NO_OF_ROWS][NO_OF_COLUMNS];
 
     public ChessMan mActivePiece;
+    DatabaseReference mdata;
+    public static boolean hasmove=false;
+
+
+
+//    xác định màu bản cờ
+    public static boolean isWhite_chessBoard=false;
 
 //   lưu các vị trí của quân trắng và quân đen
     public HashMap<String, ArrayList<Position>> mAllChessMen = new HashMap<>();
+//    Xác định người chiến thắng
+    public static String winner=WHITE;
 
     public ChessBoard(Context context) {
         super(context);
@@ -114,7 +127,7 @@ public class ChessBoard extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         performClick();
-        if (!mRuleKeeper.GAME_OVER) {
+        if (!mRuleKeeper.GAME_OVER ) {
             Position newPosition = new Position((int) Math.floor(event.getY() / size),
                     (int) Math.floor(event.getX() / size));
             if (newPosition.row < NO_OF_ROWS && newPosition.column < NO_OF_COLUMNS) {
@@ -122,49 +135,101 @@ public class ChessBoard extends View {
 //                    khi ấn xuống hiển thị chấm đỏ các đường đi
                     case MotionEvent.ACTION_DOWN:
                         mActivePiece = mGameState[newPosition.row][newPosition.column];
-                        if (mActivePiece.isChessMan() && mRuleKeeper.checkTurn()) {
+                        if (mActivePiece.isChessMan() && mRuleKeeper.checkTurn() && isWhite_chessBoard==mActivePiece.isWhite()) {
                             mActivePiece.showMoves(mGameState);
+                            x=mActivePiece.row();
+                            y=mActivePiece.column();
                         }
                         break;
 //                   kéo thả để di chuyển
                     case MotionEvent.ACTION_UP:
-                        //ẩn chấm đỏ
-                        mActivePiece.hideMoves(mGameState);
-                        //nếu đến lượt và có thể ăn
-                        if (mRuleKeeper.checkTurn() && mActivePiece.canAdvanceTo(newPosition)) {
-                            if (simulateAdvance(mActivePiece.mPosition, newPosition)) {
-                                if (mGameState[newPosition.row][newPosition.column].isChessMan() &&
-                                        !mGameState[newPosition.row][newPosition.column].isShadowPawn()) {
-                                    ArrayList<Position> pieces = mAllChessMen.get(mGameState[newPosition.row][newPosition.column].mColor);
-                                    pieces.remove(mGameState[newPosition.row][newPosition.column].mPosition);
-                                }
-                                ArrayList<Position> pieces = mAllChessMen.get(mActivePiece.mColor);
-                                pieces.remove(mActivePiece.mPosition);
-                                pieces.add(newPosition);
-                                mActivePiece.advance(mGameState, newPosition);
-                                mRuleKeeper.isGameInStalemate();
-                                mRuleKeeper.changeTurn();
-                                refreshAllPossibleMoves();
-                                mRuleKeeper.notifyCheckedOrCheckmate();
-                            } else {
-                                if (mRuleKeeper.isGameInCheck) {
-                                    Snackbar.make(this, getContext().getString(R.string.protect, mRuleKeeper.playing), Snackbar.LENGTH_LONG).show();
+                        if(isWhite_chessBoard==mActivePiece.isWhite())
+                        {
+                            //ẩn chấm đỏ
+                            mActivePiece.hideMoves(mGameState);
+                            //nếu đến lượt và có thể ăn
+                            if (mRuleKeeper.checkTurn() && mActivePiece.canAdvanceTo(newPosition)) {
+                                if (simulateAdvance(mActivePiece.mPosition, newPosition)) {
+                                    if (mGameState[newPosition.row][newPosition.column].isChessMan() &&
+                                            !mGameState[newPosition.row][newPosition.column].isShadowPawn()) {
+                                        ArrayList<Position> pieces = mAllChessMen.get(mGameState[newPosition.row][newPosition.column].mColor);
+                                        pieces.remove(mGameState[newPosition.row][newPosition.column].mPosition);
+                                    }
+                                    ArrayList<Position> pieces = mAllChessMen.get(mActivePiece.mColor);
+                                    pieces.remove(mActivePiece.mPosition);
+                                    pieces.add(newPosition);
+                                    mActivePiece.advance(mGameState, newPosition);
+                                    xnew=newPosition.row;
+                                    ynew=newPosition.column;
+                                    mRuleKeeper.isGameInStalemate();
+                                    mRuleKeeper.changeTurn();
+
+                                    //
+                                    hasmove=true;
+                                    mdata= FirebaseDatabase.getInstance().getReference();
+                                    if(ChessActivity.white_board){
+                                        String mvv=x+""+y+""+xnew+""+ynew;
+                                        mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child("White").setValue(mvv);
+                                    }
+                                    else {
+                                        String mvv=x+""+y+""+xnew+""+ynew;
+                                        mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child("Black").setValue(mvv);
+                                    }
+                                    //
+                                    refreshAllPossibleMoves();
+                                    mRuleKeeper.notifyCheckedOrCheckmate();
                                 } else {
-                                    Snackbar.make(this, R.string.self_check, Snackbar.LENGTH_LONG).show();
+                                    if (mRuleKeeper.isGameInCheck) {
+                                        Snackbar.make(this, getContext().getString(R.string.protect, mRuleKeeper.playing), Snackbar.LENGTH_LONG).show();
+                                    } else {
+                                        Snackbar.make(this, R.string.self_check, Snackbar.LENGTH_LONG).show();
+                                    }
                                 }
                             }
+                            break;
                         }
-                        break;
+
                 }
                 invalidate();
             }
         }
+
         return true;
+    }
+
+//    Xử lý thông số vị trí nhận về
+    public void move_realetime(int x,int y,int xnew,int ynew){
+        Position newPosition = new Position(xnew,ynew);
+        mActivePiece = mGameState[x][y];
+        if (mActivePiece.canAdvanceTo(newPosition)) {
+            if (simulateAdvance(mActivePiece.mPosition, newPosition)) {
+                if (mGameState[newPosition.row][newPosition.column].isChessMan() &&
+                        !mGameState[newPosition.row][newPosition.column].isShadowPawn()) {
+                    ArrayList<Position> pieces = mAllChessMen.get(mGameState[newPosition.row][newPosition.column].mColor);
+                    pieces.remove(mGameState[newPosition.row][newPosition.column].mPosition);
+                }
+                ArrayList<Position> pieces = mAllChessMen.get(mActivePiece.mColor);
+                pieces.remove(mActivePiece.mPosition);
+                pieces.add(newPosition);
+                mActivePiece.advance(mGameState, newPosition);
+                mRuleKeeper.isGameInStalemate();
+                mRuleKeeper.changeTurn();
+
+                refreshAllPossibleMoves();
+                mRuleKeeper.notifyCheckedOrCheckmate();
+            } else {
+                if (mRuleKeeper.isGameInCheck) {
+                    Snackbar.make(this, getContext().getString(R.string.protect, mRuleKeeper.playing), Snackbar.LENGTH_LONG).show();
+                } else {
+                    Snackbar.make(this, R.string.self_check, Snackbar.LENGTH_LONG).show();
+                }
+            }
+        }
+        invalidate();
     }
 
 //  tìm vua của người đi hiện tại
     protected King findCorrespondingKing() {
-
         for (int row = 0; row < mGameState[0].length; row++) {
             for (ChessMan chessMan : mGameState[row]) {
                 if (chessMan.isKing() && chessMan.mColor.equalsIgnoreCase(mRuleKeeper.playing)) {
@@ -172,35 +237,32 @@ public class ChessBoard extends View {
                 }
             }
         }
-
         return null;
-
     }
-
     //hàm tạo bàn cờ mặc định
     public void createDefaultGameState() {
-
         for (int row = 0; row < mGameState[0].length; row++) {
             for (int column = 0; column < mGameState[0].length; column++) {
-
+//               ô trắng đen trong bàn cờ
                 if (row % 2 == 0) {
                     mColors[row][column] = column % 2 == 0 ? light : dark;
                 } else {
                     mColors[row][column] = column % 2 == 0 ? dark : light;
                 }
-
-                mGameState[row][column] = mRuleKeeper.getChessManForPosition(row, column);
+                if(isWhite_chessBoard==true)
+                {
+                    mGameState[row][column] = mRuleKeeper.getChessManForPosition(row, column);
+                }
+                else {
+                    mGameState[row][column] = mRuleKeeper.getChessManForPosition_black(row, column);
+                }
                 mGameState[row][column].setPosition(new Position(row, column));
 
                 if (mGameState[row][column].isChessMan()) {
-
                     mAllChessMen.get(mGameState[row][column].mColor).add(mGameState[row][column].mPosition);
-
                 }
-
             }
         }
-
         refreshAllPossibleMoves();
 
     }
@@ -212,6 +274,7 @@ public class ChessBoard extends View {
                 chessMan.refreshMoves(mGameState, mAllChessMen);
             }
         }
+
     }
 
     //kiểm tra khi di chuyển có bị ảnh hưởng đến tướng không

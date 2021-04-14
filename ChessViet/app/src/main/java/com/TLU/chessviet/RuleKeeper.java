@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.TLU.chessviet.ChessPieces.Bishop;
 import com.TLU.chessviet.ChessPieces.ChessMan;
@@ -17,6 +18,8 @@ import com.TLU.chessviet.ChessPieces.Pawn;
 import com.TLU.chessviet.ChessPieces.Queen;
 import com.TLU.chessviet.ChessPieces.Rook;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,7 @@ class RuleKeeper {
     TextView mPlayer1Name, mPlayer2Name, turn1, turn2;
     String playing = ChessBoard.WHITE;
     private String mPlayer1, mPlayer2;
+    FirebaseUser user;
 
     RuleKeeper(ChessBoard chessBoard) {
         mChessBoard = chessBoard;
@@ -36,9 +40,10 @@ class RuleKeeper {
 
     //chọn tên cho hai người chơi
     void setPlayerNames() {
+        user= FirebaseAuth.getInstance().getCurrentUser();
 
         //lấy tên
-        mPlayer1 = mContext.getString(R.string.player_1_name);
+        mPlayer1 = user.getDisplayName();
         mPlayer2 = mContext.getString(R.string.player_2_name);
 
         //chuyển custome_dialog xml sang view java code
@@ -75,7 +80,7 @@ class RuleKeeper {
 
     //    kiểm tra lượt đi xem quân nào là quân trắng
     boolean checkTurn() {
-        return mChessBoard.mActivePiece.mColor.equalsIgnoreCase(playing);
+            return mChessBoard.mActivePiece.mColor.equalsIgnoreCase(playing);
     }
 
     //    thay đổi lượt đi nếu khi có sự di chuyển
@@ -124,8 +129,15 @@ class RuleKeeper {
         isGameInCheck = king.isChecked(mChessBoard.mGameState, mChessBoard.mAllChessMen.get(king.mOtherColor));
 
         if (king.isCheckMated(mChessBoard)) {
+            if(playing==mChessBoard.BLACK){
+                mChessBoard.winner=mChessBoard.WHITE;
+            }
+            else {
+                mChessBoard.winner=mChessBoard.BLACK;
+            }
             gameOver();
             Snackbar.make(mChessBoard, mContext.getString(R.string.over, playing), Snackbar.LENGTH_LONG).show();
+            Toast.makeText(mChessBoard.getContext(),mChessBoard.winner+" đã chiến thắng",Toast.LENGTH_LONG).show();
         }
         else if (isGameInCheck) {
             Snackbar.make(mChessBoard, mContext.getString(R.string.in_check, playing), Snackbar.LENGTH_LONG).show();
@@ -151,6 +163,31 @@ class RuleKeeper {
                     return new Queen(mContext, row > 3);
                 case 4:
                     return new King(mContext, row > 3);
+            }
+
+        }
+
+        return new ChessMan(mContext);
+    }
+
+    //    Đặt các quân cờ vào đúng vị trí bàn cờ quân đen
+    ChessMan getChessManForPosition_black(int row, int column) {
+
+        if (row == 1 || row == 6) {
+            return new Pawn(mContext, row <= 3);
+        } else if (row == 0 || row == 7) {
+
+            switch (column) {
+                case 0: case 7:
+                    return new Rook(mContext, row <= 3);
+                case 1: case 6:
+                    return new Knight(mContext, row <= 3);
+                case 2: case 5:
+                    return new Bishop(mContext, row <= 3);
+                case 3:
+                    return new King(mContext, row <= 3);
+                case 4:
+                    return new Queen(mContext, row <= 3);
             }
 
         }
