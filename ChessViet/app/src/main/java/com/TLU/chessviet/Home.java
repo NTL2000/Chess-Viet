@@ -16,6 +16,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class Home extends AppCompatActivity {
     TextView name;
     TextView score;
     private BroadcastReceiver receiver;
+    ProgressBar progressBar;
 
 
 
@@ -53,6 +55,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         //data
         mdata= FirebaseDatabase.getInstance().getReference();
@@ -64,6 +67,8 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().hide();
 
         anhxa();
+//        progress bar
+        progressBar.setVisibility(View.INVISIBLE);
         //gán user
         user=FirebaseAuth.getInstance().getCurrentUser();
         Picasso.with(this).load(user.getPhotoUrl()).into(avatar);
@@ -82,6 +87,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=1;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -122,6 +128,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -133,7 +140,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -143,6 +150,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=2;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -183,6 +191,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -194,7 +203,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -204,6 +213,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=3;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -244,6 +254,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -255,7 +266,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -265,6 +276,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=4;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -305,6 +317,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -316,7 +329,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -326,6 +339,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=5;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -366,6 +380,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -377,7 +392,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -387,6 +402,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=6;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -427,6 +443,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -438,7 +455,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -448,6 +465,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=7;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -488,6 +506,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -499,7 +518,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -509,6 +528,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 ChessActivity.Room=8;
                 mdata.child("Room").child("Room"+String.valueOf(ChessActivity.Room)).child(now_time).setValue("0000");
+                progressBar.setVisibility(View.VISIBLE);
 
                 mdata.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -549,6 +569,7 @@ public class Home extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if(count<=3){
                             Intent intent_r1=new Intent(Home.this,ChessActivity.class);
                             startActivity(intent_r1);
@@ -560,7 +581,7 @@ public class Home extends AppCompatActivity {
 
 
                     }
-                }, 1000);
+                }, 2000);
 
 
             }
@@ -591,6 +612,7 @@ public class Home extends AppCompatActivity {
         avatar=(ImageView)findViewById(R.id.avartar);
         name=(TextView)findViewById(R.id.name);
         score=(TextView)findViewById(R.id.score);
+        progressBar=(ProgressBar)findViewById(R.id.progressBar2);
     }
 
     @Override

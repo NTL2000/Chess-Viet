@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,94 +11,126 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/home_menu"
-        android:layout_height="100dp"
-        android:layout_width="match_parent" />
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="392dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Các phòng"
-            android:textSize="50sp"
-            android:textStyle="bold"
             android:textColor="@color/bbtnt"
-            android:gravity="center"/>
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
 
             >
+
             <Button
                 android:id="@+id/r1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="Phòng 1"
-                android:background="@drawable/custome_button_room"/>
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 1" />
+
             <Button
                 android:id="@+id/r2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/r1"
-                android:text="Phòng 2"
-                android:background="@drawable/custome_button_room"/>
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 2" />
+
             <Button
                 android:id="@+id/r3"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:layout_below="@+id/r1"
-                android:text="Phòng 3"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 3" />
+
             <Button
                 android:id="@+id/r4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/r3"
                 android:layout_below="@+id/r1"
-                android:text="Phòng 4"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_toRightOf="@+id/r3"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 4" />
+
             <Button
                 android:id="@+id/r5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_below="@+id/r3"
-                android:text="Phòng 5"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 5" />
+
             <Button
                 android:id="@+id/r6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/r5"
                 android:layout_below="@+id/r3"
-                android:text="Phòng 6"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_toRightOf="@+id/r5"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 6" />
+
             <Button
                 android:id="@+id/r7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:layout_below="@+id/r5"
-                android:text="Phòng 7"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_marginRight="30dp"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 7" />
+
             <Button
                 android:id="@+id/r8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/r5"
                 android:layout_below="@+id/r5"
-                android:text="Phòng 8"
-                android:background="@drawable/custome_button_room"/>
+                android:layout_toRightOf="@+id/r5"
+                android:background="@drawable/custome_button_room"
+                android:text="Phòng 8" />
+
         </RelativeLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="104dp"
+        android:layout_height="119dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
